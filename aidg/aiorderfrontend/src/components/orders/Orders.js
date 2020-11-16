@@ -6,6 +6,8 @@ import { getOrders, deleteOrder } from "../../actions/orders";
 export class Orders extends Component {
   static propTypes = {
     orders: PropTypes.array.isRequired,
+    getOrders: PropTypes.func.isRequired,
+    deleteOrder: PropTypes.func.isRequired,
   };
 
   componentDidMount() {

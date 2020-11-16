@@ -1,4 +1,4 @@
-import { GET_ORDERS, DELETE_ORDER } from "../actions/types.js";
+import { GET_ORDERS, DELETE_ORDER, ADD_ORDER } from "../actions/types.js";
 
 const initialState = {
   description: "text",
@@ -16,6 +16,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         orders: state.orders.filter((order) => order.id !== action.payload),
+      };
+    case ADD_ORDER:
+      return {
+        ...state,
+        orders: [...state.orders, action.payload],
       };
     default:
       return state;
