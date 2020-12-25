@@ -17,10 +17,13 @@ export class Alerts extends Component {
         alert.error(`Cell: ${error.msg.buyerCell.join()}`);
       if (error.msg.buyerName)
         alert.error(`Addr: ${error.msg.buyerAddr.join()}`);
+      if (error.msg.non_field_errors)
+        alert.error(error.msg.non_field_errors.join());
     }
     if (message !== prevProps.message) {
       if (message.deleteOrder) alert.success(message.deleteOrder);
       if (message.addOrder) alert.success(message.addOrder);
+      if (message.passwordNotMatch) alert.error(message.passwordNotMatch);
     }
   }
   render() {
