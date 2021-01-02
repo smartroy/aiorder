@@ -8,10 +8,12 @@ import {
   CREATE_MESSAGE,
 } from "./types";
 
+import { tokenConfig } from "./auth";
+
 //get orders
-export const getOrders = () => (dispatch) => {
+export const getOrders = () => (dispatch, getState) => {
   axios
-    .get("/api/orders/")
+    .get("/api/orders/", tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: GET_ORDERS,
@@ -24,9 +26,9 @@ export const getOrders = () => (dispatch) => {
 };
 
 //delete order
-export const deleteOrder = (id) => (dispatch) => {
+export const deleteOrder = (id) => (dispatch, getState) => {
   axios
-    .delete(`/api/orders/${id}/`)
+    .delete(`/api/orders/${id}/`, tokenConfig(getState))
     .then((res) => {
       dispatch(createMessage({ deleteOrder: "Order Deleted" }));
       dispatch({
@@ -38,9 +40,10 @@ export const deleteOrder = (id) => (dispatch) => {
 };
 
 //add orders
-export const addOrder = (order) => (dispatch) => {
+export const addOrder = (order) => (dispatch, getState) => {
+  console.log(tokenConfig(getState));
   axios
-    .post("/api/orders/", order)
+    .post("/api/orders/", order, tokenConfig(getState))
     .then((res) => {
       dispatch(createMessage({ addOrder: "Order Added" }));
       dispatch({
